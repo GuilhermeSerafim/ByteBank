@@ -1,4 +1,5 @@
 ﻿using bytebank.Modelos.Conta;
+using ByteBank.bytebank.Util;
 using System.Numerics;
 void TestaArrayInt()
 {
@@ -93,7 +94,7 @@ void Desafio1()
     Console.WriteLine("Média: " + media);
 }
 
-void TestaArrayDeContasCorrentes()
+void TestaArrDeContasCorrentes()
 {
     ContaCorrente[] arrContas = new ContaCorrente[]
     {
@@ -108,4 +109,10 @@ void TestaArrayDeContasCorrentes()
         Console.WriteLine($"Índice {i} - Conta {cAtual.Conta}");
     }
 }
-TestaArrayDeContasCorrentes();
+
+void TestaArrDeContasCorrentesUtil()
+{
+    ListaDeContasCorrentes listaCC = new(tamanhoInicial: 2);
+    listaCC.Adicionar(new ContaCorrente(777), 3);
+}
+TestaArrDeContasCorrentesUtil();
