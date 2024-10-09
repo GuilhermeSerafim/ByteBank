@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using bytebank.Modelos.Conta;
+using System.Numerics;
 void TestaArrayInt()
 {
     int[] idades = new int[5];
@@ -64,30 +65,47 @@ void TestaMediana(Array arr)
     Console.WriteLine($"Com base na amostra, a mediana é = {mediana}");
 }
 
-
-// Desafio 1
-double[] amostra = new double[5];
-for (int i = 0; i < amostra.Length; i++)
+void Desafio1()
 {
-    amostra[i] = new Random().Next(1, 11);
-}
-Console.WriteLine("Bem vindo ao Byte Bank");
-double CalcularMedia(double[] numeros)
-{
-    if ((numeros == null) || (numeros.Length == 0))
+    double[] amostra = new double[5];
+    for (int i = 0; i < amostra.Length; i++)
     {
-        Console.WriteLine("Amostra de dados nula ou vazia.");
-        return 0;
+        amostra[i] = new Random().Next(1, 11);
     }
-    double media;
-    double acc = 0;
-    for (int i = 0; i < numeros.Length; i++)
+    Console.WriteLine("Bem vindo ao Byte Bank");
+    double CalcularMedia(double[] numeros)
     {
-        acc += numeros[i];
+        if ((numeros == null) || (numeros.Length == 0))
+        {
+            Console.WriteLine("Amostra de dados nula ou vazia.");
+            return 0;
+        }
+        double media;
+        double acc = 0;
+        for (int i = 0; i < numeros.Length; i++)
+        {
+            acc += numeros[i];
+        }
+        media = acc / numeros.Length;
+        return media;
     }
-    media = acc / numeros.Length;
-    return media;
+    var media = CalcularMedia(amostra);
+    Console.WriteLine("Média: " + media);
 }
-var media = CalcularMedia(amostra);
-Console.WriteLine("Média: " + media);
 
+void TestaArrayDeContasCorrentes()
+{
+    ContaCorrente[] arrContas = new ContaCorrente[]
+    {
+        new ContaCorrente(111),
+        new ContaCorrente(222),
+        new ContaCorrente(333)
+    };
+
+    for (int i = 0; i < arrContas.Length; i++)
+    {
+        ContaCorrente cAtual = arrContas[i];
+        Console.WriteLine($"Índice {i} - Conta {cAtual.Conta}");
+    }
+}
+TestaArrayDeContasCorrentes();
