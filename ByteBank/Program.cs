@@ -112,7 +112,12 @@ void TestaArrDeContasCorrentes()
 
 void TestaArrDeContasCorrentesUtil()
 {
-    ListaDeContasCorrentes listaCC = new(tamanhoInicial: 2);
-    listaCC.Adicionar(new ContaCorrente(777), 3);
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111));
+    listaCC.Adicionar(new ContaCorrente(222));
+    listaCC.Adicionar(new ContaCorrente(333));
+    listaCC.Adicionar(new ContaCorrente(444));
+    listaCC.Adicionar(new ContaCorrente(555));
+    listaCC.Adicionar(new ContaCorrente(666));
 }
 TestaArrDeContasCorrentesUtil();

@@ -5,30 +5,40 @@ namespace ByteBank.bytebank.Util;
 public class ListaDeContasCorrentes
 {
     private ContaCorrente[] _itens = null;
-    public ListaDeContasCorrentes(int tamanhoInicial)
+    private int _posicaoAtual = 0;
+    public ListaDeContasCorrentes(int tamanhoInicial = 5)
     {
         _itens = new ContaCorrente[tamanhoInicial];
     }
-    public void Adicionar(ContaCorrente item, int indice)
+    public void Adicionar(ContaCorrente item)
     {
-        try
+        Console.WriteLine($"Adicionando item na posição {_posicaoAtual}");
+        VerificaCapacidade(_posicaoAtual + 1);
+        _itens[_posicaoAtual] = item;
+        _posicaoAtual++;
+    }
+
+    private void VerificaCapacidade(int tamanhoNecessario)
+    {
+        if (_itens.Length >= tamanhoNecessario)
         {
-            if (_itens[indice] != null)
-            {
-                Console.WriteLine($"Adicionando item na posicao {indice}");
-                _itens[indice] = item;
-            }
-            else
-            {
-                Console.WriteLine($"Indice {indice} não encontrado");
-            }
-
+            return; // faço nada
         }
-        catch (IndexOutOfRangeException ex)
+        ContaCorrente[] nvArr = new ContaCorrente[tamanhoNecessario];
+        // Clonagem
+        for (int i = 0; _itens.Length > i; i++)
         {
-
-            throw new ArgumentOutOfRangeException(nameof(indice), "Índice fora do intervalo da lista.");
+            nvArr[i] = _itens[i];
         }
-
+        int accCapacidadeAumentada = 0;
+        foreach (var item in nvArr)
+        {
+            if(item == null)
+            {
+                accCapacidadeAumentada++;
+            }
+        }
+        Console.WriteLine($"Aumentando capacidade da lista em {accCapacidadeAumentada}");
+        _itens = nvArr;
     }
 }
