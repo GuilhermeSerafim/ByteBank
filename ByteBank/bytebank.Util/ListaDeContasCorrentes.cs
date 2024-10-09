@@ -18,6 +18,24 @@ public class ListaDeContasCorrentes
         _posicaoAtual++;
     }
 
+    public ContaCorrente? RetornaMaiorSaldoContaCorrente()
+    {
+        double ccMaiorSaldo = 0;
+        ContaCorrente? cc = null;
+        for (int i = 1; i < _itens.Length; i++)
+        {
+            if (_itens[i] != null)
+            {
+                if (ccMaiorSaldo < _itens[i].Saldo)
+                {
+                    ccMaiorSaldo = _itens[i].Saldo;
+                    cc = _itens[i];
+                }
+            }
+        }
+        return cc;
+    }
+
     private void VerificaCapacidade(int tamanhoNecessario)
     {
         if (_itens.Length >= tamanhoNecessario)
@@ -33,7 +51,7 @@ public class ListaDeContasCorrentes
         int accCapacidadeAumentada = 0;
         foreach (var item in nvArr)
         {
-            if(item == null)
+            if (item == null)
             {
                 accCapacidadeAumentada++;
             }
