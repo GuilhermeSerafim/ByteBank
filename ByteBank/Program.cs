@@ -39,14 +39,15 @@ void TestaBuscarPalavra()
         {
             Console.WriteLine($"A palavra é {s}");
             break;
-        } else
+        }
+        else
         {
             Console.WriteLine("Palavra não encontrada");
         }
     }
 }
 
- void TestaMediana(Array arr)
+void TestaMediana(Array arr)
 {
     if (arr == null || arr.Length == 0)
     {
@@ -64,11 +65,28 @@ void TestaBuscarPalavra()
 }
 
 
-Array amostra = Array.CreateInstance(typeof(double), 5);
-amostra.SetValue(5.9, 0);
-amostra.SetValue(1.8, 1);
-amostra.SetValue(7.1, 2);
-amostra.SetValue(10, 3);
-amostra.SetValue(6.9, 4);
+// Desafio 1
+double[] amostra = new double[5];
+for (int i = 0; i < amostra.Length; i++)
+{
+    amostra[i] = new Random().Next(1, 11);
+}
 Console.WriteLine("Bem vindo ao Byte Bank");
-TestaMediana(amostra);
+double CalcularMedia(double[] numeros)
+{
+    double media;
+    double acc = 0;
+    for (int i = 0; i < numeros.Length; i++)
+    {
+        acc += numeros[i];
+    }
+    media = acc / numeros.Length;
+    return media;
+}
+var media = CalcularMedia(amostra);
+foreach (var item in amostra)
+{
+    Console.WriteLine(item);
+}
+Console.WriteLine("Média: " + media);
+
