@@ -89,9 +89,5 @@ double CalcularMedia(double[] numeros)
     return media;
 }
 var media = CalcularMedia(amostra);
-foreach (var item in amostra)
-{
-    Console.WriteLine(item);
-}
 Console.WriteLine("Média: " + media);
 
