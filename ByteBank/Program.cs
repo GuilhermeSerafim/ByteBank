@@ -74,6 +74,11 @@ for (int i = 0; i < amostra.Length; i++)
 Console.WriteLine("Bem vindo ao Byte Bank");
 double CalcularMedia(double[] numeros)
 {
+    if ((numeros == null) || (numeros.Length == 0))
+    {
+        Console.WriteLine("Amostra de dados nula ou vazia.");
+        return 0;
+    }
     double media;
     double acc = 0;
     for (int i = 0; i < numeros.Length; i++)
