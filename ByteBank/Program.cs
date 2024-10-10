@@ -125,7 +125,7 @@ void TestaListaDeContasCorrentesUtil()
 void TestaMaiorSaldoDasContasCorrentes() // Desafio 2
 {
     ListaDeContasCorrentes listaCC = new(); // Posição default 5
-    listaCC.Adicionar(new ContaCorrente(111) { Saldo = 1100.10});
+    listaCC.Adicionar(new ContaCorrente(111) { Saldo = 1100.10 });
     listaCC.Adicionar(new ContaCorrente(222) { Saldo = 1200.10 });
     listaCC.Adicionar(new ContaCorrente(333) { Saldo = 1300.10 });
     listaCC.Adicionar(new ContaCorrente(444) { Saldo = 1400.10 });
@@ -137,7 +137,7 @@ void TestaMaiorSaldoDasContasCorrentes() // Desafio 2
         Console.WriteLine($"Conta com maior valor: {ccMaiorValor.Conta} - Valor: R$ {ccMaiorValor.Saldo}");
     } else
     {
-        Console.WriteLine("Informe contas com saldo");
+        Console.WriteLine("Informe contas com saldo!");
     }
 }
 

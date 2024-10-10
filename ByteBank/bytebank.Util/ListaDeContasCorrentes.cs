@@ -2,6 +2,7 @@
 
 namespace ByteBank.bytebank.Util;
 
+// classe que encapsula as operações sobre uma lista de contas correntes
 public class ListaDeContasCorrentes
 {
     private ContaCorrente[] _itens = null;
@@ -20,20 +21,18 @@ public class ListaDeContasCorrentes
 
     public ContaCorrente? RetornaMaiorSaldoContaCorrente()
     {
-        double ccMaiorSaldo = 0;
-        ContaCorrente? cc = null;
-        for (int i = 1; i < _itens.Length; i++)
+        double maiorSaldo = 0;
+        ContaCorrente? ccMaiorSaldo = null;
+
+        for (int i = 0; i < _itens.Length; i++)
         {
-            if (_itens[i] != null)
+            if (maiorSaldo < _itens[i].Saldo)
             {
-                if (ccMaiorSaldo < _itens[i].Saldo)
-                {
-                    ccMaiorSaldo = _itens[i].Saldo;
-                    cc = _itens[i];
-                }
+                maiorSaldo = _itens[i].Saldo;
+                ccMaiorSaldo = _itens[i];
             }
         }
-        return cc;
+        return ccMaiorSaldo ?? null;
     }
 
     private void VerificaCapacidade(int tamanhoNecessario)
