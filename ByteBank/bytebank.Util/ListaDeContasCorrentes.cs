@@ -6,17 +6,17 @@ namespace ByteBank.bytebank.Util;
 public class ListaDeContasCorrentes
 {
     private ContaCorrente[] _itens = null;
-    private int _posicaoAtual = 0;
+    private int _proxPosicaoArr = 0;
     public ListaDeContasCorrentes(int tamanhoInicial = 5)
     {
         _itens = new ContaCorrente[tamanhoInicial];
     }
     public void Adicionar(ContaCorrente item)
     {
-        Console.WriteLine($"Adicionando item na posição {_posicaoAtual}");
-        VerificaCapacidade(_posicaoAtual + 1);
-        _itens[_posicaoAtual] = item;
-        _posicaoAtual++;
+        Console.WriteLine($"Adicionando item na posição {_proxPosicaoArr}");
+        VerificaCapacidade(_proxPosicaoArr + 1);
+        _itens[_proxPosicaoArr] = item;
+        _proxPosicaoArr++; // Esse cara sempre vai ter um à mais de acordo com a posições do nosso array
     }
 
     public ContaCorrente? RetornaMaiorSaldoContaCorrente()
@@ -57,5 +57,54 @@ public class ListaDeContasCorrentes
         }
         Console.WriteLine($"Aumentando capacidade da lista em {accCapacidadeAumentada}");
         _itens = nvArr;
+    }
+
+    public void Remover(ContaCorrente contaASerRemovida)
+    {
+        int indiceItemASerRemovido = -1;
+        // Localiza o índice da conta a ser removida
+        for (int i = 0; i < _proxPosicaoArr; i++)
+        {
+            ContaCorrente ccAtual = _itens[i];
+            if(ccAtual == contaASerRemovida)
+            {
+                indiceItemASerRemovido = i; // Atribuindo o indice, para a remoção
+                break;
+            }
+        }
+
+        // Se a conta não for encontrada, exibe uma mensagem e encerra o método (pois o 'indiceItemASerRemovido' não foi atribuido, logicamente não foi encontrado o indice, e ele continua no estado inicial {-1})
+        if (indiceItemASerRemovido == -1)
+        {
+            Console.WriteLine("Conta não encontrada");
+            return;
+        }
+
+
+        // Move os elementos à frente da conta removida para uma posição anterior no array
+        for (int i = indiceItemASerRemovido; i < _proxPosicaoArr; ++i)
+        {
+            _itens[i] = _itens[i + 1]; 
+        }
+        // Atualiza o índice da próxima posição e limpa a última posição preenchida
+        _proxPosicaoArr--;
+        _itens[_proxPosicaoArr] = null;
+    }
+    public void ExibeLista()
+    {
+        for (int i = 0; i < _itens.Length; i++)
+        {
+            if (_itens[i] != null)
+            {
+                var conta = _itens[i];
+                Console.WriteLine($" Indice[{i}] = " +
+                    $"N° da Agência: {conta.Numero_agencia}");
+            }
+        }
+        foreach (var item in _itens)
+        {
+            if(item != null) 
+            Console.WriteLine($"Índice[{item}]");
+        }
     }
 }

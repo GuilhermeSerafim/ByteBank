@@ -122,7 +122,7 @@ void TestaListaDeContasCorrentesUtil()
     Console.WriteLine(listaCC);
 }
 
-void TestaMaiorSaldoDasContasCorrentes() // Desafio 2
+void Desafio2()
 {
     ListaDeContasCorrentes listaCC = new(); // Posição default 5
     listaCC.Adicionar(new ContaCorrente(111) { Saldo = 1100.10 });
@@ -132,13 +132,39 @@ void TestaMaiorSaldoDasContasCorrentes() // Desafio 2
     listaCC.Adicionar(new ContaCorrente(555) { Saldo = 1500.10 });
     listaCC.Adicionar(new ContaCorrente(666) { Saldo = 1600.10 });
     var ccMaiorValor = listaCC.RetornaMaiorSaldoContaCorrente();
-    if(ccMaiorValor != null)
+    if (ccMaiorValor != null)
     {
         Console.WriteLine($"Conta com maior valor: {ccMaiorValor.Conta} - Valor: R$ {ccMaiorValor.Saldo}");
-    } else
+    }
+    else
     {
         Console.WriteLine("Informe contas com saldo!");
     }
 }
 
-TestaMaiorSaldoDasContasCorrentes();
+void TestaRemoverConta()
+{
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111)
+    {
+        Saldo = 1100.10,
+        Nome_Agencia = "Nubank",
+    });
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1200.10,
+        Nome_Agencia = "Nubank"
+    });
+    var contaDoGui = new ContaCorrente(712) { Nome_Agencia = "PagBank" };
+    listaCC.Adicionar(contaDoGui);
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.ExibeLista();
+    Console.WriteLine("===========");
+    listaCC.Remover(contaDoGui);
+    listaCC.ExibeLista();
+}
+TestaRemoverConta();
