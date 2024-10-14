@@ -7,6 +7,21 @@ public class ListaDeContasCorrentes
 {
     private ContaCorrente[] _itens = null;
     private int _proxPosicaoArr = 0;
+    public int Tamanho
+    {
+        get
+        {
+            return _proxPosicaoArr;
+        }
+    }
+    // Indexando
+    public ContaCorrente this[int indice]
+    {
+        get
+        {
+            return RecuperarContaIndice(indice);
+        }
+    }
     public ListaDeContasCorrentes(int tamanhoInicial = 5)
     {
         _itens = new ContaCorrente[tamanhoInicial];
@@ -60,13 +75,13 @@ public class ListaDeContasCorrentes
     }
 
     public void Remover(ContaCorrente contaASerRemovida)
-        {
+    {
         int indiceItemASerRemovido = -1;
         // Localiza o índice da conta a ser removida
         for (int i = 0; i < _proxPosicaoArr; i++)
         {
             ContaCorrente ccAtual = _itens[i];
-            if(ccAtual == contaASerRemovida)
+            if (ccAtual == contaASerRemovida)
             {
                 indiceItemASerRemovido = i; // Atribuindo o indice, para a remoção
                 break;
@@ -84,7 +99,7 @@ public class ListaDeContasCorrentes
         // Move os elementos à frente da conta removida para uma posição anterior no array
         for (int i = indiceItemASerRemovido; i < _proxPosicaoArr; ++i)
         {
-            _itens[i] = _itens[i + 1]; 
+            _itens[i] = _itens[i + 1];
         }
         // Atualiza o índice da próxima posição e limpa a última posição preenchida
         _proxPosicaoArr--;
@@ -104,23 +119,17 @@ public class ListaDeContasCorrentes
         }
         foreach (var item in _itens)
         {
-            if(item != null) 
-            Console.WriteLine($"Índice[{item}]");
+            if (item != null)
+                Console.WriteLine($"Índice[{item}]");
         }
     }
 
     public ContaCorrente RecuperarContaIndice(int indice)
     {
-        if(indice < 0 ||  indice >= _proxPosicaoArr)
+        if (indice < 0 || indice >= _proxPosicaoArr)
         {
             throw new ArgumentOutOfRangeException(nameof(indice));
         }
         return _itens[indice];
-    }
-    public int Tamanho { 
-        get
-        {
-            return _proxPosicaoArr;
-        } 
     }
 }

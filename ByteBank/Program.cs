@@ -210,7 +210,7 @@ void X()
     });
     for (int i = 0; i < listaCC.Tamanho; i++)
     {
-        ContaCorrente conta = listaCC.RecuperarContaIndice(i);
+        ContaCorrente conta = listaCC[i];
         Console.WriteLine($"Índice [{i}] = {conta.Conta} | {conta.Numero_agencia}");
     }
 }
