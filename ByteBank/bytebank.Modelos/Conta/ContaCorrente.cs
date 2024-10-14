@@ -99,8 +99,8 @@
 		public ContaCorrente(int numero_agencia)
 		{
 			Numero_agencia = numero_agencia;
-			Conta = Guid.NewGuid().ToString().Substring(0, 8);
-			Titular = new Cliente();
+			Conta = Guid.NewGuid().ToString().Substring(0, 8); // Gera uma string única de 8 caracteres baseada em um GUID.
+            Titular = new Cliente();
 			TotalDeContasCriadas++;
 		}
 

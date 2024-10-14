@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using bytebank.Modelos.Conta;
+using ByteBank.bytebank.Util;
+using System.Numerics;
 void TestaArrayInt()
 {
     int[] idades = new int[5];
@@ -64,30 +66,152 @@ void TestaMediana(Array arr)
     Console.WriteLine($"Com base na amostra, a mediana é = {mediana}");
 }
 
-
-// Desafio 1
-double[] amostra = new double[5];
-for (int i = 0; i < amostra.Length; i++)
+void Desafio1()
 {
-    amostra[i] = new Random().Next(1, 11);
-}
-Console.WriteLine("Bem vindo ao Byte Bank");
-double CalcularMedia(double[] numeros)
-{
-    if ((numeros == null) || (numeros.Length == 0))
+    double[] amostra = new double[5];
+    for (int i = 0; i < amostra.Length; i++)
     {
-        Console.WriteLine("Amostra de dados nula ou vazia.");
-        return 0;
+        amostra[i] = new Random().Next(1, 11);
     }
-    double media;
-    double acc = 0;
-    for (int i = 0; i < numeros.Length; i++)
+    Console.WriteLine("Bem vindo ao Byte Bank");
+    double CalcularMedia(double[] numeros)
     {
-        acc += numeros[i];
+        if ((numeros == null) || (numeros.Length == 0))
+        {
+            Console.WriteLine("Amostra de dados nula ou vazia.");
+            return 0;
+        }
+        double media;
+        double acc = 0;
+        for (int i = 0; i < numeros.Length; i++)
+        {
+            acc += numeros[i];
+        }
+        media = acc / numeros.Length;
+        return media;
     }
-    media = acc / numeros.Length;
-    return media;
+    var media = CalcularMedia(amostra);
+    Console.WriteLine("Média: " + media);
 }
-var media = CalcularMedia(amostra);
-Console.WriteLine("Média: " + media);
 
+void TestaArrDeContasCorrentes()
+{
+    ContaCorrente[] arrContas = new ContaCorrente[]
+    {
+        new ContaCorrente(111),
+        new ContaCorrente(222),
+        new ContaCorrente(333)
+    };
+
+    for (int i = 0; i < arrContas.Length; i++)
+    {
+        ContaCorrente cAtual = arrContas[i];
+        Console.WriteLine($"Índice {i} - Conta {cAtual.Conta}");
+    }
+}
+
+void TestaListaDeContasCorrentesUtil()
+{
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111));
+    listaCC.Adicionar(new ContaCorrente(222));
+    listaCC.Adicionar(new ContaCorrente(333));
+    listaCC.Adicionar(new ContaCorrente(444));
+    listaCC.Adicionar(new ContaCorrente(555));
+    listaCC.Adicionar(new ContaCorrente(666));
+    Console.WriteLine(listaCC);
+}
+
+void Desafio2()
+{
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111) { Saldo = 1100.10 });
+    listaCC.Adicionar(new ContaCorrente(222) { Saldo = 1200.10 });
+    listaCC.Adicionar(new ContaCorrente(333) { Saldo = 1300.10 });
+    listaCC.Adicionar(new ContaCorrente(444) { Saldo = 1400.10 });
+    listaCC.Adicionar(new ContaCorrente(555) { Saldo = 1500.10 });
+    listaCC.Adicionar(new ContaCorrente(666) { Saldo = 1600.10 });
+    var ccMaiorValor = listaCC.RetornaMaiorSaldoContaCorrente();
+    if (ccMaiorValor != null)
+    {
+        Console.WriteLine($"Conta com maior valor: {ccMaiorValor.Conta} - Valor: R$ {ccMaiorValor.Saldo}");
+    }
+    else
+    {
+        Console.WriteLine("Informe contas com saldo!");
+    }
+}
+
+void TestaRemoverConta()
+{
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111)
+    {
+        Saldo = 1100.10,
+        Nome_Agencia = "Nubank",
+    });
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1200.10,
+        Nome_Agencia = "Nubank"
+    });
+    var contaDoGui = new ContaCorrente(712) { Nome_Agencia = "PagBank" };
+    listaCC.Adicionar(contaDoGui);
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.ExibeLista();
+    Console.WriteLine("===========");
+    listaCC.Remover(contaDoGui);
+    listaCC.ExibeLista();
+}
+
+void X()
+{
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111)
+    {
+        Saldo = 1100.10,
+        Nome_Agencia = "Nubank",
+    });
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1200.10,
+        Nome_Agencia = "Nubank"
+    });
+    var contaDoGui = new ContaCorrente(712) { Nome_Agencia = "PagBank" };
+    listaCC.Adicionar(contaDoGui);
+    listaCC.Adicionar(new ContaCorrente(234)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.Adicionar(new ContaCorrente(345)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.Adicionar(new ContaCorrente(678)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.Adicionar(new ContaCorrente(541)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.Adicionar(new ContaCorrente(321)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    for (int i = 0; i < listaCC.Tamanho; i++)
+    {
+        ContaCorrente conta = listaCC[i];
+        Console.WriteLine($"Índice [{i}] = {conta.Conta} | {conta.Numero_agencia}");
+    }
+}
+X();
