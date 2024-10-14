@@ -226,9 +226,13 @@ void Desafio2()
  A possibilidade de expandir seus limites por meio da propriedade Capacity.
 A classe Array já disponibiliza operações de adição, inserção e exclusão de elementos.
 Como os arrays também tem disponível os métodos de ordenação de elementos Sort e de inversão da ordem por meio do Reverse.
-Uma característica importante da classe ArrayList é a possibilidade de se adicionar qualquer tipo de elemento, uma vez que ela trabalha com tipo da superclasse object da qual todos os tipos do C# derivam.
+Uma característica importante da classe ArrayList é a possibilidade de se adicionar qualquer tipo de elemento, uma vez que ela trabalha com tipo da superclasse object da qual todos os tipos do C# derivam.    
  */
-ArrayList _listaDeContas = new();
+ArrayList _listaDeContas = new ArrayList() {
+    new ContaCorrente(93) {Saldo=100},
+    new ContaCorrente(94) {Saldo=200},
+    new ContaCorrente(95) {Saldo=60}
+};
 void AtendimentoCliente()
 {
     for (char opcao = '0'; opcao != '6';)
@@ -265,7 +269,7 @@ void AtendimentoCliente()
                 CadastrarConta();
                 break;
             case '6':
-                CadastrarConta();
+                Console.WriteLine("Encerrando... ");
                 break;
 
             default:
