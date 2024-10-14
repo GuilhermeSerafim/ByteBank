@@ -168,7 +168,7 @@ void TestaRemoverConta()
     listaCC.ExibeLista();
 }
 
-void X()
+void TesteClasseIndexada()
 {
     ListaDeContasCorrentes listaCC = new(); // Posição default 5
     listaCC.Adicionar(new ContaCorrente(111)
@@ -214,4 +214,4 @@ void X()
         Console.WriteLine($"Índice [{i}] = {conta.Conta} | {conta.Numero_agencia}");
     }
 }
-X();
+TesteClasseIndexada();
