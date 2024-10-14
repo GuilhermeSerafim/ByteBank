@@ -60,7 +60,7 @@ public class ListaDeContasCorrentes
     }
 
     public void Remover(ContaCorrente contaASerRemovida)
-    {
+        {
         int indiceItemASerRemovido = -1;
         // Localiza o índice da conta a ser removida
         for (int i = 0; i < _proxPosicaoArr; i++)
@@ -98,6 +98,7 @@ public class ListaDeContasCorrentes
             {
                 var conta = _itens[i];
                 Console.WriteLine($" Indice[{i}] = " +
+                    $"Conta: {conta.Conta} - " +
                     $"N° da Agência: {conta.Numero_agencia}");
             }
         }
