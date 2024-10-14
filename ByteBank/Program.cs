@@ -167,4 +167,51 @@ void TestaRemoverConta()
     listaCC.Remover(contaDoGui);
     listaCC.ExibeLista();
 }
-TestaRemoverConta();
+
+void X()
+{
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111)
+    {
+        Saldo = 1100.10,
+        Nome_Agencia = "Nubank",
+    });
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1200.10,
+        Nome_Agencia = "Nubank"
+    });
+    var contaDoGui = new ContaCorrente(712) { Nome_Agencia = "PagBank" };
+    listaCC.Adicionar(contaDoGui);
+    listaCC.Adicionar(new ContaCorrente(234)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.Adicionar(new ContaCorrente(345)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.Adicionar(new ContaCorrente(678)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.Adicionar(new ContaCorrente(541)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.Adicionar(new ContaCorrente(321)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    for (int i = 0; i < listaCC.Tamanho; i++)
+    {
+        ContaCorrente conta = listaCC.RecuperarContaIndice(i);
+        Console.WriteLine($"Índice [{i}] = {conta.Conta} | {conta.Numero_agencia}");
+    }
+}
+X();

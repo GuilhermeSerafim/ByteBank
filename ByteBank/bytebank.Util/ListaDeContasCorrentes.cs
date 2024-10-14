@@ -108,4 +108,19 @@ public class ListaDeContasCorrentes
             Console.WriteLine($"Índice[{item}]");
         }
     }
+
+    public ContaCorrente RecuperarContaIndice(int indice)
+    {
+        if(indice < 0 ||  indice >= _proxPosicaoArr)
+        {
+            throw new ArgumentOutOfRangeException(nameof(indice));
+        }
+        return _itens[indice];
+    }
+    public int Tamanho { 
+        get
+        {
+            return _proxPosicaoArr;
+        } 
+    }
 }
