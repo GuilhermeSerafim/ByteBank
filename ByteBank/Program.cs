@@ -2,6 +2,7 @@
 using ByteBank.bytebank.Util;
 using System.Collections;
 using System.Numerics;
+using System.Security.Cryptography;
 
 #region Aulas e Exemplos
 void TestaArrayInt()
@@ -169,6 +170,7 @@ void TesteClasseIndexada()
         Console.WriteLine($"Índice [{i}] = {conta.Conta} | {conta.Numero_agencia}");
     }
 }
+
 #endregion
 
 #region Desafios
@@ -218,6 +220,22 @@ void Desafio2()
     else
     {
         Console.WriteLine("Informe contas com saldo!");
+    }
+}
+#endregion
+
+#region Introduzindo Generics
+Generica<int> teste1 = new();
+teste1.MostrarMensagem(2);
+Generica<string> teste2 = new();
+teste2.MostrarMensagem("Olá, mundo!");
+Generica<bool> teste3 = new();
+teste3.MostrarMensagem(true);
+public class Generica<T>
+{
+    public void MostrarMensagem(T t)
+    {
+        Console.WriteLine($"Exibindo {t}");
     }
 }
 #endregion
@@ -334,5 +352,3 @@ void CadastrarConta()
     Console.WriteLine("... Conta cadastrada com sucesso! ...");
     Console.ReadKey();
 }
-
-AtendimentoCliente();
