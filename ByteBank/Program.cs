@@ -225,7 +225,33 @@ void Desafio2()
 
 void Desafio3()
 {
-
+    List<string> nomesDosEscolhidos = new List<string>()
+    {
+        "Bruce Wayne",
+        "Carlos Vilagran",
+        "Richard Grayson",
+        "Bob Kane",
+        "Will Farrel",
+        "Lois Lane",
+        "General Welling",
+        "Perla Letícia",
+        "Uxas",
+        "Diana Prince",
+        "Elisabeth Romanova",
+        "Anakin Wayne"
+    };
+    for( int i = 0; nomesDosEscolhidos.Count > 0; i++ )
+    {
+        if (nomesDosEscolhidos[i] == "Anakin Wayne")
+        {
+            Console.WriteLine($"O nome {nomesDosEscolhidos[i]} existe no arr!");
+            break;
+        }
+    }
+}
+bool Desafio4(List<string> nomesDosEscolhidos, string escolhido)
+{
+    return nomesDosEscolhidos.Contains(escolhido);
 }
 #endregion
 
@@ -375,7 +401,7 @@ void ApredendoSobreList()
         new ContaCorrente(777) { Numero_agencia = 7, Conta = "GGG" },
         new ContaCorrente(888) { Numero_agencia = 8, Conta = "HHH" },
         new ContaCorrente(999) { Numero_agencia = 9, Conta = "III" },
-    }; 
+    };
     // Adicionando depois do ultimo elemento, uma collection com novos itens, totalizando 6 itens 
     _listaCC2.AddRange(_listaCC3);
     //for (int i = 0; i < _listaCC2.Count; i++)
