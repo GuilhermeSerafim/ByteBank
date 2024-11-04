@@ -1,8 +1,5 @@
 ﻿using bytebank.Modelos.Conta;
 using ByteBank.bytebank.Util;
-using System.Collections;
-using System.Numerics;
-using System.Security.Cryptography;
 
 #region Aulas e Exemplos
 void TestaArrayInt()
@@ -224,21 +221,6 @@ void Desafio2()
 }
 #endregion
 
-#region Introduzindo Generics
-Generica<int> teste1 = new();
-teste1.MostrarMensagem(2);
-Generica<string> teste2 = new();
-teste2.MostrarMensagem("Olá, mundo!");
-Generica<bool> teste3 = new();
-teste3.MostrarMensagem(true);
-public class Generica<T>
-{
-    public void MostrarMensagem(T t)
-    {
-        Console.WriteLine($"Exibindo {t}");
-    }
-}
-#endregion
 
 // Representa uma lista fortemente tipada de objetos que podem ser acessados pelo índice. Fornece métodos para pesquisar, classificar e manipular listas.
 List<ContaCorrente> _listaDeContas = new() {
@@ -352,3 +334,19 @@ void CadastrarConta()
     Console.WriteLine("... Conta cadastrada com sucesso! ...");
     Console.ReadKey();
 }
+
+#region Introduzindo Generics
+Generica<int> teste1 = new();
+teste1.MostrarMensagem(2);
+Generica<string> teste2 = new();
+teste2.MostrarMensagem("Olá, mundo!");
+Generica<bool> teste3 = new();
+teste3.MostrarMensagem(true);
+public class Generica<T>
+{
+    public void MostrarMensagem(T t)
+    {
+        Console.WriteLine($"Exibindo {t}");
+    }
+}
+#endregion
