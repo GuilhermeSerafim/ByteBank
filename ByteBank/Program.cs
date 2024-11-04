@@ -95,8 +95,6 @@ void TestaListaDeContasCorrentesUtil()
 }
 
 
-
-
 void TesteClasseIndexada()
 {
     ListaDeContasCorrentes listaCC = new(); // Posição default 5
@@ -143,6 +141,21 @@ void TesteClasseIndexada()
         Console.WriteLine($"Índice [{i}] = {conta.Conta} | {conta.Numero_agencia}");
     }
 }
+
+//Introduzindo Generics
+//Generica<int> teste1 = new();
+//teste1.MostrarMensagem(2);
+//Generica<string> teste2 = new();
+//teste2.MostrarMensagem("Olá, mundo!");
+//Generica<bool> teste3 = new();
+//teste3.MostrarMensagem(true);
+//public class Generica<T>
+//{
+//    public void MostrarMensagem(T t)
+//    {
+//        Console.WriteLine($"Exibindo {t}");
+//    }
+//}
 
 #endregion
 
@@ -196,14 +209,6 @@ void Desafio2()
     }
 }
 #endregion
-
-
-// Representa uma lista fortemente tipada de objetos que podem ser acessados pelo índice. Fornece métodos para pesquisar, classificar e manipular listas.
-List<ContaCorrente> _listaDeContas = new() {
-    new ContaCorrente(93) {Saldo=100},
-    new ContaCorrente(94) {Saldo=200},
-    new ContaCorrente(95) {Saldo=60}
-};
 
 void AtendimentoCliente()
 {
@@ -308,21 +313,7 @@ void CadastrarConta()
     Console.ReadKey();
 }
 
-//#region Introduzindo Generics
-//Generica<int> teste1 = new();
-//teste1.MostrarMensagem(2);
-//Generica<string> teste2 = new();
-//teste2.MostrarMensagem("Olá, mundo!");
-//Generica<bool> teste3 = new();
-//teste3.MostrarMensagem(true);
-//public class Generica<T>
-//{
-//    public void MostrarMensagem(T t)
-//    {
-//        Console.WriteLine($"Exibindo {t}");
-//    }
-//}
-//#endregion
+
 
 void TestaRemoverConta()
 {
@@ -350,4 +341,5 @@ void TestaRemoverConta()
     listaCC.ExibeLista();
 }
 
-TestaRemoverConta();
+
+// Destrinchando + o List<T>
