@@ -95,31 +95,7 @@ void TestaListaDeContasCorrentesUtil()
 }
 
 
-void TestaRemoverConta()
-{
-    ListaDeContasCorrentes listaCC = new(); // Posição default 5
-    listaCC.Adicionar(new ContaCorrente(111)
-    {
-        Saldo = 1100.10,
-        Nome_Agencia = "Nubank",
-    });
-    listaCC.Adicionar(new ContaCorrente(222)
-    {
-        Saldo = 1200.10,
-        Nome_Agencia = "Nubank"
-    });
-    var contaDoGui = new ContaCorrente(712) { Nome_Agencia = "PagBank" };
-    listaCC.Adicionar(contaDoGui);
-    listaCC.Adicionar(new ContaCorrente(222)
-    {
-        Saldo = 1900.10,
-        Nome_Agencia = "Nubank"
-    });
-    listaCC.ExibeLista();
-    Console.WriteLine("===========");
-    listaCC.Remover(contaDoGui);
-    listaCC.ExibeLista();
-}
+
 
 void TesteClasseIndexada()
 {
@@ -256,13 +232,10 @@ void AtendimentoCliente()
                 ListarContas();
                 break;
             case '3':
-                CadastrarConta();
                 break;
             case '4':
-                CadastrarConta();
                 break;
             case '5':
-                CadastrarConta();
                 break;
             case '6':
                 Console.WriteLine("Encerrando... ");
@@ -335,18 +308,46 @@ void CadastrarConta()
     Console.ReadKey();
 }
 
-#region Introduzindo Generics
-Generica<int> teste1 = new();
-teste1.MostrarMensagem(2);
-Generica<string> teste2 = new();
-teste2.MostrarMensagem("Olá, mundo!");
-Generica<bool> teste3 = new();
-teste3.MostrarMensagem(true);
-public class Generica<T>
+//#region Introduzindo Generics
+//Generica<int> teste1 = new();
+//teste1.MostrarMensagem(2);
+//Generica<string> teste2 = new();
+//teste2.MostrarMensagem("Olá, mundo!");
+//Generica<bool> teste3 = new();
+//teste3.MostrarMensagem(true);
+//public class Generica<T>
+//{
+//    public void MostrarMensagem(T t)
+//    {
+//        Console.WriteLine($"Exibindo {t}");
+//    }
+//}
+//#endregion
+
+void TestaRemoverConta()
 {
-    public void MostrarMensagem(T t)
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111)
     {
-        Console.WriteLine($"Exibindo {t}");
-    }
+        Saldo = 1100.10,
+        Nome_Agencia = "Nubank",
+    });
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1200.10,
+        Nome_Agencia = "Nubank"
+    });
+    var contaDoGui = new ContaCorrente(712) { Nome_Agencia = "PagBank" };
+    listaCC.Adicionar(contaDoGui);
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.ExibeLista();
+    Console.WriteLine("===========");
+    listaCC.Remover(contaDoGui);
+    listaCC.ExibeLista();
 }
-#endregion
+
+TestaRemoverConta();

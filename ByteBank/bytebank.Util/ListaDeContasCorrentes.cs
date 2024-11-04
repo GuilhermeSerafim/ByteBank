@@ -100,11 +100,12 @@ public class ListaDeContasCorrentes
         // Move os elementos à frente da conta removida para uma posição anterior no array
         for (int i = indiceItemASerRemovido; i < _proxPosicaoArr; ++i)
         {
-            _itens[i] = _itens[i + 1];
+            // Verifica se o próximo índice (i + 1) está dentro do limite atual do array.
+            // Se não estiver, define a posição atual como null para limpar o último elemento.
+            _itens[i] = (i + 1 >= _proxPosicaoArr) ? null : _itens[i + 1];
         }
-        // Atualiza o índice da próxima posição e limpa a última posição preenchida
+        // Atualiza o índice da próxima posição DO ARRAY
         _proxPosicaoArr--;
-        _itens[_proxPosicaoArr] = null;
     }
     public void ExibeLista()
     {
