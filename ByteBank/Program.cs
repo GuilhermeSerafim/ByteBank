@@ -1,5 +1,8 @@
 ﻿using bytebank.Modelos.Conta;
 using ByteBank.bytebank.Util;
+using System.Collections;
+using System.Numerics;
+using System.Security.Cryptography;
 
 #region Aulas e Exemplos
 void TestaArrayInt()
@@ -95,6 +98,32 @@ void TestaListaDeContasCorrentesUtil()
 }
 
 
+void TestaRemoverConta()
+{
+    ListaDeContasCorrentes listaCC = new(); // Posição default 5
+    listaCC.Adicionar(new ContaCorrente(111)
+    {
+        Saldo = 1100.10,
+        Nome_Agencia = "Nubank",
+    });
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1200.10,
+        Nome_Agencia = "Nubank"
+    });
+    var contaDoGui = new ContaCorrente(712) { Nome_Agencia = "PagBank" };
+    listaCC.Adicionar(contaDoGui);
+    listaCC.Adicionar(new ContaCorrente(222)
+    {
+        Saldo = 1900.10,
+        Nome_Agencia = "Nubank"
+    });
+    listaCC.ExibeLista();
+    Console.WriteLine("===========");
+    listaCC.Remover(contaDoGui);
+    listaCC.ExibeLista();
+}
+
 void TesteClasseIndexada()
 {
     ListaDeContasCorrentes listaCC = new(); // Posição default 5
@@ -141,21 +170,6 @@ void TesteClasseIndexada()
         Console.WriteLine($"Índice [{i}] = {conta.Conta} | {conta.Numero_agencia}");
     }
 }
-
-//Introduzindo Generics
-//Generica<int> teste1 = new();
-//teste1.MostrarMensagem(2);
-//Generica<string> teste2 = new();
-//teste2.MostrarMensagem("Olá, mundo!");
-//Generica<bool> teste3 = new();
-//teste3.MostrarMensagem(true);
-//public class Generica<T>
-//{
-//    public void MostrarMensagem(T t)
-//    {
-//        Console.WriteLine($"Exibindo {t}");
-//    }
-//}
 
 #endregion
 
@@ -209,6 +223,29 @@ void Desafio2()
     }
 }
 #endregion
+
+#region Introduzindo Generics
+//Generica<int> teste1 = new();
+//teste1.MostrarMensagem(2);
+//Generica<string> teste2 = new();
+//teste2.MostrarMensagem("Olá, mundo!");
+//Generica<bool> teste3 = new();
+//teste3.MostrarMensagem(true);
+//public class Generica<T>
+//{
+//    public void MostrarMensagem(T t)
+//    {
+//        Console.WriteLine($"Exibindo {t}");
+//    }
+//}
+#endregion
+
+// Representa uma lista fortemente tipada de objetos que podem ser acessados pelo índice. Fornece métodos para pesquisar, classificar e manipular listas.
+List<ContaCorrente> _listaDeContas = new() {
+    new ContaCorrente(93) {Saldo=100},
+    new ContaCorrente(94) {Saldo=200},
+    new ContaCorrente(95) {Saldo=60}
+};
 
 void AtendimentoCliente()
 {
@@ -313,33 +350,50 @@ void CadastrarConta()
     Console.ReadKey();
 }
 
-
-
-void TestaRemoverConta()
+void ApredendoSobreList()
 {
-    ListaDeContasCorrentes listaCC = new(); // Posição default 5
-    listaCC.Adicionar(new ContaCorrente(111)
+    // Destrinchando + o List<T>
+    List<ContaCorrente> _listaCC = new()
     {
-        Saldo = 1100.10,
-        Nome_Agencia = "Nubank",
-    });
-    listaCC.Adicionar(new ContaCorrente(222)
+        new ContaCorrente(111) { Numero_agencia = 1, Conta = "AAA" },
+        new ContaCorrente(222) { Numero_agencia = 2, Conta = "BBB" },
+        new ContaCorrente(333) { Numero_agencia = 3, Conta = "CCC" },
+    };
+    List<ContaCorrente> _listaCC2 = new()
     {
-        Saldo = 1200.10,
-        Nome_Agencia = "Nubank"
-    });
-    var contaDoGui = new ContaCorrente(712) { Nome_Agencia = "PagBank" };
-    listaCC.Adicionar(contaDoGui);
-    listaCC.Adicionar(new ContaCorrente(222)
+        new ContaCorrente(444) { Numero_agencia = 4, Conta = "DDD" },
+        new ContaCorrente(555) { Numero_agencia = 5, Conta = "EEE" },
+        new ContaCorrente(666) { Numero_agencia = 6, Conta = "FFF" },
+    };
+    List<ContaCorrente> _listaCC3 = new()
     {
-        Saldo = 1900.10,
-        Nome_Agencia = "Nubank"
-    });
-    listaCC.ExibeLista();
-    Console.WriteLine("===========");
-    listaCC.Remover(contaDoGui);
-    listaCC.ExibeLista();
+        new ContaCorrente(777) { Numero_agencia = 7, Conta = "GGG" },
+        new ContaCorrente(888) { Numero_agencia = 8, Conta = "HHH" },
+        new ContaCorrente(999) { Numero_agencia = 9, Conta = "III" },
+    }; 
+    // Adicionando depois do ultimo elemento, uma collection com novos itens, totalizando 6 itens 
+    _listaCC2.AddRange(_listaCC3);
+    //for (int i = 0; i < _listaCC2.Count; i++)
+    //{
+    //    Console.WriteLine($"Indice[{i}] = Conta [{_listaCC2[i].Conta}]");
+    //}
+
+    //// Cria outra lista de acordo com o range especificado (i, count)
+    //var shadowList = _listaCC.GetRange(0, 2);
+    //for(int i = 0; i < shadowList.Count; i++)
+    //{
+    //    Console.WriteLine($"Indice[{i}] = Conta [{shadowList[i].Conta}]");
+    //}
+
+
+    // Exibindo lista revertida
+    _listaCC2.Reverse();
+    for (int i = 0; i < _listaCC2.Count; i++)
+    {
+        Console.WriteLine($"Indice[{i}] = Conta [{_listaCC2[i].Conta}]");
+    }
+
 }
 
 
-// Destrinchando + o List<T>
+ApredendoSobreList();
