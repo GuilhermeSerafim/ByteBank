@@ -77,7 +77,7 @@ public class ListaDeContasCorrentes
     public void Remover(ContaCorrente contaASerRemovida)
     {
         // Inicializando um variavel no excopo de fora, para usar em outro for
-        int indiceItemASerRemovido = 0;
+        int indiceItemASerRemovido = -1;
         // Localiza o índice da conta a ser removida
         for (int i = 0; i < _proxPosicaoArr; i++)
         {
@@ -90,7 +90,7 @@ public class ListaDeContasCorrentes
         }
 
         // Se a conta não for encontrada, exibe uma mensagem e encerra o método (pois o 'indiceItemASerRemovido' não foi atribuido, logicamente não foi encontrado o indice, e ele continua no estado inicial {-1})
-        if (indiceItemASerRemovido == 0)
+        if (indiceItemASerRemovido == -1)
         {
             Console.WriteLine("Conta não encontrada");
             return;
