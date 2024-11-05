@@ -513,8 +513,8 @@ void PesquisarContas()
                     Console.WriteLine("Informe o número da Conta: ");
                     string _nConta = Console.ReadLine();
                     ContaCorrente? consultaConta = ConsultaPorNumeroConta(_nConta);
+                    Console.WriteLine(consultaConta.ToString());
                     Console.ReadKey();
-                    Console.WriteLine(consultaCpf.ToString);
                     if (_nConta != null && consultaConta != null)
                     {
                         break;
@@ -527,7 +527,7 @@ void PesquisarContas()
                 Console.WriteLine("Informe o CPF titular");
                 string _cpf = Console.ReadLine();
                 ContaCorrente? consultaCpf = ConsultaPorCpfTitular(_cpf);
-                Console.WriteLine(consultaCpf.ToString);
+                Console.WriteLine(consultaCpf.ToString());
                 Console.ReadKey();
                 break;
             }
