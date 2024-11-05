@@ -439,6 +439,7 @@ void AtendimentoCliente()
                     RemoverContas();
                     break;
                 case '4':
+                    OrdenarContas();
                     break;
                 case '5':
                     break;
@@ -457,6 +458,14 @@ void AtendimentoCliente()
     {
         Console.WriteLine($"{e.Message}");
     }
+}
+
+void OrdenarContas()
+{
+    // Aqui vai dar um erro, pois não conseguimos comparar 2 elementos no arr
+    _listaDeContas.Sort();
+    Console.WriteLine("... Lista de contas ordenada ...");
+    Console.ReadKey();
 }
 
 void RemoverContas()
