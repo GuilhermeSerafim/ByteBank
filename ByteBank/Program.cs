@@ -287,9 +287,9 @@ void Desafio5()
 
 // Representa uma lista fortemente tipada de objetos que podem ser acessados pelo índice. Fornece métodos para pesquisar, classificar e manipular listas.
 List<ContaCorrente> _listaDeContas = new() {
-    new ContaCorrente(93) {Saldo=100},
-    new ContaCorrente(95) {Saldo=60},
-    new ContaCorrente(94) {Saldo=200},
+    new ContaCorrente(93) {Saldo=100, Titular = new Cliente{Cpf = "11111", Nome = "Gui"} },
+    new ContaCorrente(95) {Saldo=60, Titular = new Cliente{Cpf = "22222", Nome = "Isa"} },
+    new ContaCorrente(94) {Saldo=200, Titular = new Cliente{Cpf = "33333", Nome = "Miguel" } },
 };
 
 void ListarContas()
@@ -440,6 +440,7 @@ void AtendimentoCliente()
                     OrdenarContas();
                     break;
                 case '5':
+                    PesquisarContas();
                     break;
                 case '6':
                     Console.WriteLine("Encerrando... ");
@@ -457,7 +458,6 @@ void AtendimentoCliente()
         Console.WriteLine($"{e.Message}");
     }
 }
-
 
 
 void RemoverContas()
@@ -494,6 +494,77 @@ void OrdenarContas()
     _listaDeContas.Sort();
     Console.WriteLine("... Lista de contas ordenada ...");
     Console.ReadKey();
+}
+
+void PesquisarContas()
+{
+    Console.Clear();
+    Console.WriteLine("===============================");
+    Console.WriteLine("===    PESQUISAR CONTAS     ===");
+    Console.WriteLine("===============================");
+    Console.WriteLine("\n");
+    Console.Write("Deseja pesquisar por (1) NUMERO DA CONTA ou (2)CPF TITULAR ? ");
+    switch (int.Parse(Console.ReadLine()))
+    {
+        case 1:
+            {
+                do
+                {
+                    Console.WriteLine("Informe o número da Conta: ");
+                    string _nConta = Console.ReadLine();
+                    ContaCorrente? consultaConta = ConsultaPorNumeroConta(_nConta);
+                    Console.ReadKey();
+                    if (_nConta != null && consultaConta != null)
+                    {
+                        break;
+                    }
+                } while (true);
+                break;
+            }
+        case 2:
+            {
+                Console.WriteLine("Informe o CPF titular");
+                string _cpf = Console.ReadLine();
+                ContaCorrente? consultaCpf = ConsultaPorCpfTitular(_cpf);
+                Console.ReadKey();
+                break;
+            }
+        default:
+            {
+                Console.WriteLine("Opção não implementada");
+                break;
+            }
+    }
+}
+
+ContaCorrente? ConsultaPorCpfTitular(string? cpf)
+{
+    // Variável temp
+    ContaCorrente ccTemp = null;
+    for (int i = 0; i < _listaDeContas.Count; i++)
+    {
+        if (_listaDeContas[i].Titular.Cpf.Equals(cpf))
+        {
+            ccTemp = _listaDeContas[i];
+            break;
+        }
+    }
+    return ccTemp;
+}
+
+ContaCorrente? ConsultaPorNumeroConta(string? nConta)
+{
+    ContaCorrente ccTemp = null;
+    for (int i = 0; i < _listaDeContas.Count; i++)
+    {
+        if (_listaDeContas[i].Conta.Equals(nConta))
+        {
+            ccTemp = _listaDeContas[i];
+            break;
+        }
+    }
+    return ccTemp;
+
 }
 
 AtendimentoCliente();
