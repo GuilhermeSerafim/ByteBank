@@ -253,6 +253,19 @@ bool Desafio4(List<string> nomesDosEscolhidos, string escolhido)
 {
     return nomesDosEscolhidos.Contains(escolhido);
 }
+
+void Desafio5()
+{
+    SortedList<int, string> times = new SortedList<int, string>();
+    times.Add(0, "Flamengo");
+    times.Add(2, "Santos");
+    times.Add(1, "Juventus");
+
+    foreach (var item in times.Values)
+    {
+        Console.WriteLine(item);
+    }
+}
 #endregion
 
 #region Introduzindo Generics
