@@ -288,8 +288,8 @@ void Desafio5()
 // Representa uma lista fortemente tipada de objetos que podem ser acessados pelo índice. Fornece métodos para pesquisar, classificar e manipular listas.
 List<ContaCorrente> _listaDeContas = new() {
     new ContaCorrente(93) {Saldo=100},
+    new ContaCorrente(95) {Saldo=60},
     new ContaCorrente(94) {Saldo=200},
-    new ContaCorrente(95) {Saldo=60}
 };
 
 void ListarContas()
@@ -310,9 +310,7 @@ void ListarContas()
         Console.WriteLine("===  Dados da Conta  ===");
         Console.WriteLine("Número da Conta : " + item.Conta);
         Console.WriteLine("Saldo da Conta : " + item.Saldo);
-        Console.WriteLine("Titular da Conta: " + item.Titular.Nome);
-        Console.WriteLine("CPF do Titular  : " + item.Titular.Cpf);
-        Console.WriteLine("Profissão do Titular: " + item.Titular.Profissao);
+        Console.WriteLine("Nrº Agência: " + item.Numero_agencia);
         Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         Console.ReadKey();
     }
@@ -460,13 +458,7 @@ void AtendimentoCliente()
     }
 }
 
-void OrdenarContas()
-{
-    // Aqui vai dar um erro, pois não conseguimos comparar 2 elementos no arr
-    _listaDeContas.Sort();
-    Console.WriteLine("... Lista de contas ordenada ...");
-    Console.ReadKey();
-}
+
 
 void RemoverContas()
 {
@@ -496,4 +488,12 @@ void RemoverContas()
     }
     Console.ReadKey();
 }
+void OrdenarContas()
+{
+    // Aqui vai dar um erro, pois não conseguimos comparar 2 elementos no arr
+    _listaDeContas.Sort();
+    Console.WriteLine("... Lista de contas ordenada ...");
+    Console.ReadKey();
+}
+
 AtendimentoCliente();
