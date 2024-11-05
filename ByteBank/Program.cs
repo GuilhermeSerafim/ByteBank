@@ -424,6 +424,7 @@ void AtendimentoCliente()
             }
             catch (Exception e)
             {
+                // Lança uma nova exceção do tipo ByteBankException, usando a mensagem de erro da exceção original.
                 throw new ByteBankException(e.Message);
             }
             switch (opcao)
@@ -435,6 +436,7 @@ void AtendimentoCliente()
                     ListarContas();
                     break;
                 case '3':
+                    RemoverContas();
                     break;
                 case '4':
                     break;
@@ -457,4 +459,32 @@ void AtendimentoCliente()
     }
 }
 
+void RemoverContas()
+{
+    Console.Clear();
+    Console.WriteLine("===============================");
+    Console.WriteLine("===      REMOVER CONTAS     ===");
+    Console.WriteLine("===============================");
+    Console.WriteLine("\n");
+    Console.Write("Informe o número da Conta: ");
+    string numeroConta = Console.ReadLine();
+    ContaCorrente conta = null;
+    foreach (var ccASerRemovida in _listaDeContas)
+    {
+        if (ccASerRemovida.Conta.Equals(numeroConta))
+        {
+            conta = ccASerRemovida;
+        }
+    }
+    if (conta != null)
+    {
+        _listaDeContas.Remove(conta);
+        Console.WriteLine("... Conta removida da lista! ...");
+    }
+    else
+    {
+        Console.WriteLine(" ... Conta para remoção não encontrada ...");
+    }
+    Console.ReadKey();
+}
 AtendimentoCliente();
