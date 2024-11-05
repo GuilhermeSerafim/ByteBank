@@ -1,4 +1,5 @@
 ﻿using bytebank.Modelos.Conta;
+using ByteBank.bytebank.Exceptions;
 using ByteBank.bytebank.Util;
 using System.Collections;
 using System.Numerics;
@@ -240,7 +241,7 @@ void Desafio3()
         "Elisabeth Romanova",
         "Anakin Wayne"
     };
-    for( int i = 0; nomesDosEscolhidos.Count > 0; i++ )
+    for (int i = 0; nomesDosEscolhidos.Count > 0; i++)
     {
         if (nomesDosEscolhidos[i] == "Anakin Wayne")
         {
@@ -290,49 +291,6 @@ List<ContaCorrente> _listaDeContas = new() {
     new ContaCorrente(94) {Saldo=200},
     new ContaCorrente(95) {Saldo=60}
 };
-
-void AtendimentoCliente()
-{
-    for (char opcao = '0'; opcao != '6';)
-    {
-        Console.WriteLine("Teste");
-        Console.Clear();
-        Console.WriteLine("===============================");
-        Console.WriteLine("===       Atendimento       ===");
-        Console.WriteLine("===1 - Cadastrar Conta      ===");
-        Console.WriteLine("===2 - Listar Contas        ===");
-        Console.WriteLine("===3 - Remover Conta        ===");
-        Console.WriteLine("===4 - Ordenar Contas       ===");
-        Console.WriteLine("===5 - Pesquisar Conta      ===");
-        Console.WriteLine("===6 - Sair do Sistema      ===");
-        Console.WriteLine("===============================");
-        Console.WriteLine("\n\n");
-        Console.Write("Digite a opção desejada: ");
-        opcao = Console.ReadLine()[0];
-        switch (opcao)
-        {
-            case '1':
-                CadastrarConta();
-                break;
-            case '2':
-                ListarContas();
-                break;
-            case '3':
-                break;
-            case '4':
-                break;
-            case '5':
-                break;
-            case '6':
-                Console.WriteLine("Encerrando... ");
-                break;
-
-            default:
-                Console.WriteLine("Opção não implementada.");
-                break;
-        }
-    }
-}
 
 void ListarContas()
 {
@@ -438,3 +396,65 @@ void ApredendoSobreList()
     }
 
 }
+
+
+
+void AtendimentoCliente()
+{
+    try
+    {
+        for (char opcao = '0'; opcao != '6';)
+        {
+            Console.WriteLine("Teste");
+            Console.Clear();
+            Console.WriteLine("===============================");
+            Console.WriteLine("===       Atendimento       ===");
+            Console.WriteLine("===1 - Cadastrar Conta      ===");
+            Console.WriteLine("===2 - Listar Contas        ===");
+            Console.WriteLine("===3 - Remover Conta        ===");
+            Console.WriteLine("===4 - Ordenar Contas       ===");
+            Console.WriteLine("===5 - Pesquisar Conta      ===");
+            Console.WriteLine("===6 - Sair do Sistema      ===");
+            Console.WriteLine("===============================");
+            Console.WriteLine("\n\n");
+            Console.Write("Digite a opção desejada: ");
+            try
+            {
+                opcao = Console.ReadLine()[0];
+            }
+            catch (Exception e)
+            {
+                throw new ByteBankException(e.Message);
+            }
+            switch (opcao)
+            {
+                case '1':
+                    CadastrarConta();
+                    break;
+                case '2':
+                    ListarContas();
+                    break;
+                case '3':
+                    break;
+                case '4':
+                    break;
+                case '5':
+                    break;
+                case '6':
+                    Console.WriteLine("Encerrando... ");
+                    break;
+
+                default:
+                    Console.WriteLine("Opção não implementada.");
+                    break;
+            }
+        }
+
+    }
+    catch (ByteBankException e)
+    {
+        Console.WriteLine($"{e.Message}");
+    }
+}
+
+AtendimentoCliente();
