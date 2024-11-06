@@ -58,6 +58,7 @@ public class ByteBankAtendimento
                         break;
                     case '6':
                         Console.WriteLine("Encerrando... ");
+                        Console.ReadKey();
                         break;
 
                     default:
@@ -105,13 +106,11 @@ public class ByteBankAtendimento
         Console.WriteLine("===============================");
         Console.WriteLine("\n");
         Console.WriteLine("=== Informe dados da conta ===");
-        Console.Write("Número da conta: ");
-        string numeroConta = Console.ReadLine();
 
         Console.Write("Número da Agência: ");
         int numeroAgencia = int.Parse(Console.ReadLine());
-
         ContaCorrente conta = new ContaCorrente(numeroAgencia);
+        Console.WriteLine($"Número da conta  [NOVA] : {conta.Conta}");
 
         Console.Write("Informe o saldo inicial: ");
         conta.Saldo = double.Parse(Console.ReadLine());
@@ -167,14 +166,15 @@ public class ByteBankAtendimento
         Console.ReadKey();
     }
 
-    private void PesquisarContas()
+    void PesquisarContas()
     {
         Console.Clear();
         Console.WriteLine("===============================");
         Console.WriteLine("===    PESQUISAR CONTAS     ===");
         Console.WriteLine("===============================");
         Console.WriteLine("\n");
-        Console.Write("Deseja pesquisar por (1) NUMERO DA CONTA ou (2)CPF TITULAR ou (3) Nº AGÊNCIA ou (4) PROFISSÃO DO TITULAR ");
+        Console.Write("Deseja pesquisar por (1) NUMERO DA CONTA ou (2) CPF TITULAR ou (3) Nº AGÊNCIA ou (4) PROFISSÃO DO TITULAR: ");
+
         switch (int.Parse(Console.ReadLine()))
         {
             case 1:
@@ -195,29 +195,65 @@ public class ByteBankAtendimento
                 }
             case 2:
                 {
-                    Console.WriteLine("Informe o CPF titular");
-                    string _cpf = Console.ReadLine()!;
-                    ContaCorrente? consultaCpf = ConsultaPorCpfTitular(_cpf);
-                    Console.WriteLine(consultaCpf != null ? consultaCpf.ToString() : "Conta não encontrada");
-                    Console.ReadKey();
+                    do
+                    {
+                        Console.WriteLine("Informe o CPF do titular: ");
+                        string _cpf = Console.ReadLine();
+                        ContaCorrente? consultaCpf = ConsultaPorCpfTitular(_cpf);
+                        Console.WriteLine(consultaCpf != null ? consultaCpf.ToString() : "Conta não encontrada");
+                        Console.ReadKey();
+                        if (_cpf != null && consultaCpf != null)
+                        {
+                            break;
+                        }
+                    } while (true);
                     break;
                 }
             case 3:
                 {
-                    Console.WriteLine("Informe o número da agência");
-                    int _nAgencia = int.Parse(Console.ReadLine());
-                    var contasPorAgencia = ConsultaPorAgencia(_nAgencia);
-                    ExibirListaContasFiltradas(contasPorAgencia);
-                    Console.ReadKey();
+                    do
+                    {
+                        Console.WriteLine("Informe o número da agência: ");
+                        int _nAgencia;
+                        if (int.TryParse(Console.ReadLine(), out _nAgencia))
+                        {
+                            var contasPorAgencia = ConsultaPorAgencia(_nAgencia);
+                            if (contasPorAgencia.Count > 0)
+                            {
+                                ExibirListaContasFiltradas(contasPorAgencia);
+                                Console.ReadKey();
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Nenhuma conta encontrada para essa agência.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Número da agência inválido.");
+                        }
+                    } while (true);
                     break;
                 }
             case 4:
                 {
-                    Console.WriteLine("Informe a profissão dos clientes, que quer consultar");
-                    string profissao = Console.ReadLine()!;
-                    var contasPorProfissao = ConsultaPorProfissao(profissao);
-                    ExibirListaContasFiltradas(contasPorProfissao);
-                    Console.ReadKey();
+                    do
+                    {
+                        Console.WriteLine("Informe a profissão dos clientes que deseja consultar: ");
+                        string profissao = Console.ReadLine();
+                        var contasPorProfissao = ConsultaPorProfissao(profissao);
+                        if (contasPorProfissao.Count > 0)
+                        {
+                            ExibirListaContasFiltradas(contasPorProfissao);
+                            Console.ReadKey();
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nenhuma conta encontrada para essa profissão.");
+                        }
+                    } while (true);
                     break;
                 }
             default:
@@ -227,6 +263,8 @@ public class ByteBankAtendimento
                 }
         }
     }
+
+
     private ContaCorrente? ConsultaPorCpfTitular(string cpf) => _contas.Where(conta => conta.Titular.Cpf == cpf).FirstOrDefault();
     private ContaCorrente? ConsultaPorNumeroConta(string? nConta) => _contas.Where(conta => conta.Conta == nConta).FirstOrDefault();
     private List<ContaCorrente> ConsultaPorProfissao(string profissao) => (

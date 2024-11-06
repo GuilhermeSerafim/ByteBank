@@ -1,10 +1,6 @@
 ﻿using bytebank.Modelos.Conta;
-using ByteBank.bytebank.Exceptions;
+using ByteBank;
 using ByteBank.bytebank.Util;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Security.Cryptography;
 
 #region Aulas e Exemplos
 void TestaArrayInt()
@@ -287,47 +283,5 @@ void Desafio5()
 #endregion
 
 
-void ApredendoSobreList()
-{
-    // Destrinchando + o List<T>
-    List<ContaCorrente> _listaCC = new()
-    {
-        new ContaCorrente(111) { Numero_agencia = 1, Conta = "AAA" },
-        new ContaCorrente(222) { Numero_agencia = 2, Conta = "BBB" },
-        new ContaCorrente(333) { Numero_agencia = 3, Conta = "CCC" },
-    };
-    List<ContaCorrente> _listaCC2 = new()
-    {
-        new ContaCorrente(444) { Numero_agencia = 4, Conta = "DDD" },
-        new ContaCorrente(555) { Numero_agencia = 5, Conta = "EEE" },
-        new ContaCorrente(666) { Numero_agencia = 6, Conta = "FFF" },
-    };
-    List<ContaCorrente> _listaCC3 = new()
-    {
-        new ContaCorrente(777) { Numero_agencia = 7, Conta = "GGG" },
-        new ContaCorrente(888) { Numero_agencia = 8, Conta = "HHH" },
-        new ContaCorrente(999) { Numero_agencia = 9, Conta = "III" },
-    };
-    // Adicionando depois do ultimo elemento, uma collection com novos itens, totalizando 6 itens 
-    _listaCC2.AddRange(_listaCC3);
-    //for (int i = 0; i < _listaCC2.Count; i++)
-    //{
-    //    Console.WriteLine($"Indice[{i}] = Conta [{_listaCC2[i].Conta}]");
-    //}
-
-    //// Cria outra lista de acordo com o range especificado (i, count)
-    //var shadowList = _listaCC.GetRange(0, 2);
-    //for(int i = 0; i < shadowList.Count; i++)
-    //{
-    //    Console.WriteLine($"Indice[{i}] = Conta [{shadowList[i].Conta}]");
-    //}
-
-
-    // Exibindo lista revertida
-    _listaCC2.Reverse();
-    for (int i = 0; i < _listaCC2.Count; i++)
-    {
-        Console.WriteLine($"Indice[{i}] = Conta [{_listaCC2[i].Conta}]");
-    }
-
-}
+Console.WriteLine("Bem vindo ao ByteBank");
+new ByteBankAtendimento().AtendimentoCliente();
