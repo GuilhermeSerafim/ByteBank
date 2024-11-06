@@ -334,9 +334,9 @@ void ApredendoSobreList()
 
 // Representa uma lista fortemente tipada de objetos que podem ser acessados pelo índice. Fornece métodos para pesquisar, classificar e manipular listas.
 List<ContaCorrente> _listaDeContas = new() {
-    new ContaCorrente(93) { Numero_agencia=2, Saldo=100, Titular = new Cliente{Cpf = "11111", Nome = "Gui"} },
-    new ContaCorrente(95) { Numero_agencia=2, Saldo=60, Titular = new Cliente{Cpf = "22222", Nome = "Isa"} },
-    new ContaCorrente(94) { Numero_agencia=3, Saldo =200, Titular = new Cliente{Cpf = "33333", Nome = "Miguel" } },
+    new ContaCorrente(93) { Numero_agencia=2, Saldo=100, Titular = new Cliente{Cpf = "11111", Nome = "Gui", Profissao = "Empreendedor"} },
+    new ContaCorrente(95) { Numero_agencia=2, Saldo=60, Titular = new Cliente{Cpf = "22222", Nome = "Isa", Profissao = "Programador"} },
+    new ContaCorrente(94) { Numero_agencia=3, Saldo =200, Titular = new Cliente{Cpf = "33333", Nome = "Miguel", Profissao = "Engenheiro de Segurança" } },
 };
 
 void ListarContas()
@@ -504,7 +504,7 @@ void PesquisarContas()
     Console.WriteLine("===    PESQUISAR CONTAS     ===");
     Console.WriteLine("===============================");
     Console.WriteLine("\n");
-    Console.Write("Deseja pesquisar por (1) NUMERO DA CONTA ou (2)CPF TITULAR ou (3) Nº AGÊNCIA ");
+    Console.Write("Deseja pesquisar por (1) NUMERO DA CONTA ou (2)CPF TITULAR ou (3) Nº AGÊNCIA ou (4) PROFISSÃO DO TITULAR ");
     switch (int.Parse(Console.ReadLine()))
     {
         case 1:
@@ -537,7 +537,16 @@ void PesquisarContas()
                 Console.WriteLine("Informe o número da agência");
                 int _nAgencia = int.Parse(Console.ReadLine());
                 var contasPorAgencia = ConsultaPorAgencia(_nAgencia);
-                ExibirListaContas(contasPorAgencia);
+                ExibirListaContasFiltradas(contasPorAgencia);
+                Console.ReadKey();
+                break;
+            }
+        case 4:
+            {
+                Console.WriteLine("Informe a profissão dos clientes, que quer consultar");
+                string profissao = Console.ReadLine()!;
+                var contasPorProfissao = ConsultaPorProfissao(profissao);
+                ExibirListaContasFiltradas(contasPorProfissao);
                 Console.ReadKey();
                 break;
             }
@@ -548,15 +557,21 @@ void PesquisarContas()
             }
     }
 }
+List<ContaCorrente> ConsultaPorProfissao(string profissao) => (
+    from conta in _listaDeContas
+    where conta.Titular.Profissao.Equals(profissao)
+    select conta
+).ToList();
 
-void ExibirListaContas(List<ContaCorrente> contasPorAgencia)
+
+void ExibirListaContasFiltradas(List<ContaCorrente> contasFiltradas)
 {
-    if (contasPorAgencia == null)
+    if (contasFiltradas == null)
     {
         Console.WriteLine("Não há contas para serem exibidas...");
         return;
     }
-    foreach (var item in contasPorAgencia)
+    foreach (var item in contasFiltradas)
     {
         Console.WriteLine(item.ToString());
     }
@@ -564,7 +579,7 @@ void ExibirListaContas(List<ContaCorrente> contasPorAgencia)
 
 List<ContaCorrente> ConsultaPorAgencia(int nAgencia)
 {
-  //  LINQ(Language Integrated Query) é uma funcionalidade do C# para realizar consultas e manipulações de dados
+    //  LINQ(Language Integrated Query) é uma funcionalidade do C# para realizar consultas e manipulações de dados
     return (
                 from conta in _listaDeContas
                 where conta.Numero_agencia == nAgencia
