@@ -2,6 +2,7 @@
 using ByteBank.bytebank.Exceptions;
 using ByteBank.bytebank.Util;
 using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Security.Cryptography;
 
@@ -285,69 +286,6 @@ void Desafio5()
 //}
 #endregion
 
-// Representa uma lista fortemente tipada de objetos que podem ser acessados pelo índice. Fornece métodos para pesquisar, classificar e manipular listas.
-List<ContaCorrente> _listaDeContas = new() {
-    new ContaCorrente(93) {Saldo=100, Titular = new Cliente{Cpf = "11111", Nome = "Gui"} },
-    new ContaCorrente(95) {Saldo=60, Titular = new Cliente{Cpf = "22222", Nome = "Isa"} },
-    new ContaCorrente(94) {Saldo=200, Titular = new Cliente{Cpf = "33333", Nome = "Miguel" } },
-};
-
-void ListarContas()
-{
-    Console.Clear();
-    Console.WriteLine("===============================");
-    Console.WriteLine("===     LISTA DE CONTAS     ===");
-    Console.WriteLine("===============================");
-    Console.WriteLine("\n");
-    if (_listaDeContas.Count <= 0)
-    {
-        Console.WriteLine("... Não há contas cadastradas! ...");
-        Console.ReadKey();
-        return;
-    }
-    foreach (ContaCorrente item in _listaDeContas)
-    {
-        Console.WriteLine("===  Dados da Conta  ===");
-
-        Console.WriteLine(item.ToString());
-        Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        Console.ReadKey();
-    }
-}
-
-void CadastrarConta()
-{
-    Console.Clear();
-    Console.WriteLine("===============================");
-    Console.WriteLine("===   CADASTRO DE CONTAS    ===");
-    Console.WriteLine("===============================");
-    Console.WriteLine("\n");
-    Console.WriteLine("=== Informe dados da conta ===");
-    Console.Write("Número da conta: ");
-    string numeroConta = Console.ReadLine();
-
-    Console.Write("Número da Agência: ");
-    int numeroAgencia = int.Parse(Console.ReadLine());
-
-    ContaCorrente conta = new ContaCorrente(numeroAgencia);
-
-    Console.Write("Informe o saldo inicial: ");
-    conta.Saldo = double.Parse(Console.ReadLine());
-
-    Console.Write("Informe nome do Titular: ");
-    conta.Titular.Nome = Console.ReadLine();
-
-    Console.Write("Informe CPF do Titular: ");
-    conta.Titular.Cpf = Console.ReadLine();
-
-    Console.Write("Informe Profissão do Titular: ");
-    conta.Titular.Profissao = Console.ReadLine();
-
-    _listaDeContas.Add(conta);
-    //_listaDeContas.Add("sdjda"); // Não irá funcionar, pois tipamos a lista
-    Console.WriteLine("... Conta cadastrada com sucesso! ...");
-    Console.ReadKey();
-}
 
 void ApredendoSobreList()
 {
@@ -394,6 +332,70 @@ void ApredendoSobreList()
 
 }
 
+// Representa uma lista fortemente tipada de objetos que podem ser acessados pelo índice. Fornece métodos para pesquisar, classificar e manipular listas.
+List<ContaCorrente> _listaDeContas = new() {
+    new ContaCorrente(93) { Numero_agencia=2, Saldo=100, Titular = new Cliente{Cpf = "11111", Nome = "Gui"} },
+    new ContaCorrente(95) { Numero_agencia=2, Saldo=60, Titular = new Cliente{Cpf = "22222", Nome = "Isa"} },
+    new ContaCorrente(94) { Numero_agencia=3, Saldo =200, Titular = new Cliente{Cpf = "33333", Nome = "Miguel" } },
+};
+
+void ListarContas()
+{
+    Console.Clear();
+    Console.WriteLine("===============================");
+    Console.WriteLine("===     LISTA DE CONTAS     ===");
+    Console.WriteLine("===============================");
+    Console.WriteLine("\n");
+    if (_listaDeContas.Count <= 0)
+    {
+        Console.WriteLine("... Não há contas cadastradas! ...");
+        Console.ReadKey();
+        Console.ReadKey();
+        return;
+    }
+    foreach (ContaCorrente item in _listaDeContas)
+    {
+        Console.WriteLine("===  Dados da Conta  ===");
+
+        Console.WriteLine(item.ToString());
+        Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        Console.ReadKey();
+    }
+}
+
+void CadastrarConta()
+{
+    Console.Clear();
+    Console.WriteLine("===============================");
+    Console.WriteLine("===   CADASTRO DE CONTAS    ===");
+    Console.WriteLine("===============================");
+    Console.WriteLine("\n");
+    Console.WriteLine("=== Informe dados da conta ===");
+    Console.Write("Número da conta: ");
+    string numeroConta = Console.ReadLine();
+
+    Console.Write("Número da Agência: ");
+    int numeroAgencia = int.Parse(Console.ReadLine());
+
+    ContaCorrente conta = new ContaCorrente(numeroAgencia);
+
+    Console.Write("Informe o saldo inicial: ");
+    conta.Saldo = double.Parse(Console.ReadLine());
+
+    Console.Write("Informe nome do Titular: ");
+    conta.Titular.Nome = Console.ReadLine();
+
+    Console.Write("Informe CPF do Titular: ");
+    conta.Titular.Cpf = Console.ReadLine();
+
+    Console.Write("Informe Profissão do Titular: ");
+    conta.Titular.Profissao = Console.ReadLine();
+
+    _listaDeContas.Add(conta);
+    //_listaDeContas.Add("sdjda"); // Não irá funcionar, pois tipamos a lista
+    Console.WriteLine("... Conta cadastrada com sucesso! ...");
+    Console.ReadKey();
+}
 
 
 void AtendimentoCliente()
@@ -502,7 +504,7 @@ void PesquisarContas()
     Console.WriteLine("===    PESQUISAR CONTAS     ===");
     Console.WriteLine("===============================");
     Console.WriteLine("\n");
-    Console.Write("Deseja pesquisar por (1) NUMERO DA CONTA ou (2)CPF TITULAR ? ");
+    Console.Write("Deseja pesquisar por (1) NUMERO DA CONTA ou (2)CPF TITULAR ou (3) Nº AGÊNCIA ");
     switch (int.Parse(Console.ReadLine()))
     {
         case 1:
@@ -512,7 +514,7 @@ void PesquisarContas()
                     Console.WriteLine("Informe o número da Conta: ");
                     string _nConta = Console.ReadLine();
                     ContaCorrente? consultaConta = ConsultaPorNumeroConta(_nConta);
-                    Console.WriteLine(consultaConta != null ?consultaConta.ToString() : "Conta não encontrada");
+                    Console.WriteLine(consultaConta != null ? consultaConta.ToString() : "Conta não encontrada");
                     Console.ReadKey();
                     if (_nConta != null && consultaConta != null)
                     {
@@ -530,12 +532,44 @@ void PesquisarContas()
                 Console.ReadKey();
                 break;
             }
+        case 3:
+            {
+                Console.WriteLine("Informe o número da agência");
+                int _nAgencia = int.Parse(Console.ReadLine());
+                var contasPorAgencia = ConsultaPorAgencia(_nAgencia);
+                ExibirListaContas(contasPorAgencia);
+                Console.ReadKey();
+                break;
+            }
         default:
             {
                 Console.WriteLine("Opção não implementada");
                 break;
             }
     }
+}
+
+void ExibirListaContas(List<ContaCorrente> contasPorAgencia)
+{
+    if (contasPorAgencia == null)
+    {
+        Console.WriteLine("Não há contas para serem exibidas...");
+        return;
+    }
+    foreach (var item in contasPorAgencia)
+    {
+        Console.WriteLine(item.ToString());
+    }
+}
+
+List<ContaCorrente> ConsultaPorAgencia(int nAgencia)
+{
+  //  LINQ(Language Integrated Query) é uma funcionalidade do C# para realizar consultas e manipulações de dados
+    return (
+                from conta in _listaDeContas
+                where conta.Numero_agencia == nAgencia
+                select conta
+            ).ToList();
 }
 
 ContaCorrente? ConsultaPorCpfTitular(string cpf) => _listaDeContas.Where(conta => conta.Titular.Cpf == cpf).FirstOrDefault();
