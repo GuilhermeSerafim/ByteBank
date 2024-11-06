@@ -308,9 +308,8 @@ void ListarContas()
     foreach (ContaCorrente item in _listaDeContas)
     {
         Console.WriteLine("===  Dados da Conta  ===");
-        Console.WriteLine("Número da Conta : " + item.Conta);
-        Console.WriteLine("Saldo da Conta : " + item.Saldo);
-        Console.WriteLine("Nrº Agência: " + item.Numero_agencia);
+
+        Console.WriteLine(item.ToString());
         Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         Console.ReadKey();
     }
@@ -513,7 +512,7 @@ void PesquisarContas()
                     Console.WriteLine("Informe o número da Conta: ");
                     string _nConta = Console.ReadLine();
                     ContaCorrente? consultaConta = ConsultaPorNumeroConta(_nConta);
-                    Console.WriteLine(consultaConta.ToString());
+                    Console.WriteLine(consultaConta != null ?consultaConta.ToString() : "Conta não encontrada");
                     Console.ReadKey();
                     if (_nConta != null && consultaConta != null)
                     {
@@ -525,9 +524,9 @@ void PesquisarContas()
         case 2:
             {
                 Console.WriteLine("Informe o CPF titular");
-                string _cpf = Console.ReadLine();
+                string _cpf = Console.ReadLine()!;
                 ContaCorrente? consultaCpf = ConsultaPorCpfTitular(_cpf);
-                Console.WriteLine(consultaCpf.ToString());
+                Console.WriteLine(consultaCpf != null ? consultaCpf.ToString() : "Conta não encontrada");
                 Console.ReadKey();
                 break;
             }
@@ -539,34 +538,7 @@ void PesquisarContas()
     }
 }
 
-ContaCorrente? ConsultaPorCpfTitular(string? cpf)
-{
-    // Variável temp
-    ContaCorrente ccTemp = null;
-    for (int i = 0; i < _listaDeContas.Count; i++)
-    {
-        if (_listaDeContas[i].Titular.Cpf.Equals(cpf))
-        {
-            ccTemp = _listaDeContas[i];
-            break;
-        }
-    }
-    return ccTemp;
-}
-
-ContaCorrente? ConsultaPorNumeroConta(string? nConta)
-{
-    ContaCorrente ccTemp = null;
-    for (int i = 0; i < _listaDeContas.Count; i++)
-    {
-        if (_listaDeContas[i].Conta.Equals(nConta))
-        {
-            ccTemp = _listaDeContas[i];
-            break;
-        }
-    }
-    return ccTemp;
-
-}
+ContaCorrente? ConsultaPorCpfTitular(string cpf) => _listaDeContas.Where(conta => conta.Titular.Cpf == cpf).FirstOrDefault();
+ContaCorrente? ConsultaPorNumeroConta(string? nConta) => _listaDeContas.Where(conta => conta.Conta == nConta).FirstOrDefault();
 
 AtendimentoCliente();
